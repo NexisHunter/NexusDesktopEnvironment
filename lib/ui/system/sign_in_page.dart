@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nexus_desktop_environment/system/notifications/manager.dart';
 import 'package:nexus_desktop_environment/system/user/manager.dart';
 import 'package:nexus_desktop_environment/utils/encrypted_string.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatelessWidget {
   final UserManager _um = UserManager();
@@ -26,8 +28,9 @@ class SignIn extends StatelessWidget {
 
   _buildUserInput() {
     return Flexible(
-      flex: 2,
+      flex: 3,
       child: Container(
+        padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
         child: Column(
           children: [
             TextField(
@@ -39,9 +42,11 @@ class SignIn extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(hintText: 'password'),
             ),
-            FlatButton(
-              onPressed: () => _createUser(),
-              child: Text('Create User'),
+            Expanded(
+              child: FlatButton(
+                onPressed: () => _createUser(),
+                child: Text('Create User'),
+              ),
             ),
           ],
         ),
@@ -77,6 +82,7 @@ class SignIn extends StatelessWidget {
     if (username.isEmpty) {
       _clearInput();
       // Show snackbar indicating invalid input.
+      // TODO: Error Scaffold.of() called on context that does not contain a Scaffold.
       Scaffold.of(context).showSnackBar(sb);
       return;
     }
@@ -88,6 +94,7 @@ class SignIn extends StatelessWidget {
       return;
     }
     _um.current = user;
+    Provider.of<NotificationManager>(context, listen: false).currentUser = user;
     await Navigator.popAndPushNamed(context, 'desktop', arguments: user);
   }
 

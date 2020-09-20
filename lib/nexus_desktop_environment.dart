@@ -30,7 +30,7 @@ class NexusDesktopEnvironment extends StatelessWidget {
   ///
   /// [requestedRoute] is the route requesting to be displayed. It contains the
   /// possible parameters needed to route.
-  _generateRoutes(RouteSettings requestedRoute) {
+  Route<dynamic> _generateRoutes(RouteSettings requestedRoute) {
     User user;
     if (requestedRoute.arguments is User) {
       user = requestedRoute.arguments;

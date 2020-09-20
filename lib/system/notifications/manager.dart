@@ -1,24 +1,49 @@
-import 'dart:async';
-
+import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
 import 'package:nexus_desktop_environment/system/notifications/notification.dart';
+import 'package:nexus_desktop_environment/system/user/manager.dart';
 import 'package:nexus_desktop_environment/system/user/user.dart';
 
-// TODO: Handle multi user set up.
-class NotificationManager {
+class NotificationManager extends ChangeNotifier {
   static final _instance = NotificationManager._();
-  NotificationManager._()
-      : _stream = StreamController<Notification>.broadcast();
+  NotificationManager._() : _logger = Logger("NotificationManager");
   factory NotificationManager() => _instance;
+  // TODO: Fix the logger impl.
+  final Logger _logger;
 
-  final StreamController<Notification> _stream;
-
-  /// Push a [notification] to the system
-  pushNotification(Notification notification) {
-    _stream.add(notification);
+  User _current = UserManager().current;
+  set currentUser(User user) {
+    if (_current != null || _current != user) {
+      // Write the state of the original user's notifications
+      final userEntries = <String, List<Notification>>{
+        '${_current.username}': _pending,
+      };
+      _userPending.addAll(userEntries);
+    }
+    // Load the new user
+    _current = user;
+    // Load pending with user notifications
+    // Notify dependants
+    pending = _userPending[_current.username];
   }
 
-  /// Provides a stream of filtered for the specific [user].
-  Stream<Notification> filteredStream(User user) => _stream.stream
-      .where((Notification notification) => notification.user == user)
-      .asBroadcastStream();
+  List<Notification> _pending = [];
+  List<Notification> get pending => _pending;
+  set pending(List<Notification> pending) {
+    _pending = pending;
+    notifyListeners();
+  }
+
+  Map<String, List<Notification>> _userPending = {};
+
+  /// Push a [notification] to the system
+  pushNotification(Notification notification, {User user}) {
+    // _logger.info("Adding $notification");
+    print("Adding $notification");
+    if (user != null || user != _current) {
+      _userPending['${user.username}'].add(notification);
+    } else {
+      pending = [notification, ..._pending];
+    }
+  }
 }

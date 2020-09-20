@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
 import 'package:nexus_desktop_environment/utils/encrypted_string.dart';
 
 import 'user.dart';
@@ -9,6 +10,7 @@ import 'user.dart';
 class UserManager {
   File _usersFile = File('/home/.users');
   List<User> _users = [];
+  final _logger = Logger("UserManager");
   User current;
 
   static final UserManager _instance = UserManager._();
@@ -26,14 +28,14 @@ class UserManager {
 
   _parseUsersFile() {
     String f = _usersFile.readAsStringSync();
-    if (f.isEmpty) {
+    if (f.isEmpty || f.length == 1) {
       // If the file is empty, assume that it is a fresh install.
       return;
     }
     String usersString = utf8.decode(base64Decode(f));
-    print(usersString);
+    _logger.warning(usersString);
     Map userList = json.decode(usersString);
-    print(userList);
+    _logger.warning(userList);
 //    userList = userList.cast<Map<String, dynamic>>();
 
 //    userList.forEach((userMap) {
@@ -90,7 +92,7 @@ class UserManager {
   _updateUsersFile() async {
     String users = '{"users":[';
     for (final user in _users) {
-      users += '${jsonEncode(user.toMap())}';
+      users += '${jsonEncode(user.toMap())},';
     }
     users = users.substring(0, users.lastIndexOf(','));
     users += ']}';

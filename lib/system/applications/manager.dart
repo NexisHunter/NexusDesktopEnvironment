@@ -49,7 +49,6 @@ class ApplicationManager {
   }
 
   // Start
-  @override
   start(String appName) async {
     final app = _installed.firstWhere(
       (app) => app.name.toLowerCase() == appName.toLowerCase(),

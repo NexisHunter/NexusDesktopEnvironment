@@ -24,4 +24,19 @@ class Notification {
   }) : _ts = DateTime.now();
 
   markAsRead() => _read = true;
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'msg': message,
+      // 'appName': applicationName,
+      // 'iconPath': icon.image.toString(),
+      // 'user': user.toString(),
+    };
+  }
 }

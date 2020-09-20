@@ -34,15 +34,9 @@ class User {
     return '"name":"$name","username":"$username","pw":"$password"';
   }
 
-  @override
-  bool operator ==(Object other) {
-    if (!other is User) {
-      return false;
-    } else {
-      User otherUser = other;
-      return otherUser.username == _username && otherUser.name == _name;
-    }
-  }
+  operator ==(Object other) => (other is User)
+      ? other.username == _username && other.name == _name
+      : false;
 
   @override
   int get hashCode => super.hashCode;
