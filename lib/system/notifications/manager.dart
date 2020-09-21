@@ -34,6 +34,18 @@ class NotificationManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Tap into the most recently received [Notification].
+  Stream<Notification> get alertStream {
+    return Stream.fromIterable(
+      _pending.getRange(
+        0,
+        (_pending.length >= 1)
+            ? 1
+            : 0, // In the event that there are no entries return []
+      ),
+    );
+  }
+
   Map<String, List<Notification>> _userPending = {};
 
   /// Push a [notification] to the system
