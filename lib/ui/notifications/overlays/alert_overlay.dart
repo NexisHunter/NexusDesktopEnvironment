@@ -23,13 +23,16 @@ class _NotificationAlertOverlayState extends State<NotificationAlertOverlay> {
       end: 1,
       top: 1,
       width: 250,
-      // child: (manager.liste),
       child: Consumer<NotificationManager>(
         builder: (context, manager, child) => StreamBuilder<notif.Notification>(
           stream: manager.alertStream,
           builder: (ctx, snapshot) {
             if (snapshot.hasData) {
               final _notification = snapshot.data;
+              // TODO: Handle time out here/Within notification alert.
+              //  it doesn't affect the currently pending notifications, only
+              //  the alert is hidden.
+              //  A simple transparent empty alert may be a solution.
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
@@ -41,10 +44,9 @@ class _NotificationAlertOverlayState extends State<NotificationAlertOverlay> {
                   notification: _notification,
                 ),
               );
-              // return NotificationAlert(notification: snapshot.data);
             }
             return Container(
-              color: Colors.lightBlue,
+              color: Colors.transparent,
             );
           },
         ),

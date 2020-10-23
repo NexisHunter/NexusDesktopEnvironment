@@ -16,9 +16,9 @@ class User {
         _password = password;
 
   factory User.fromMap(Map<String, dynamic> userMap) => User(
-        username: userMap['username'],
-        name: userMap['name'],
-        password: EncryptedString.fromEncrypted(userMap['pw']),
+        username: userMap['username'] as String,
+        name: userMap['name'] as String,
+        password: EncryptedString.fromEncrypted(userMap['pw'] as String),
       );
 
   Map toMap() {

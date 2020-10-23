@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:nexus_desktop_environment/system/notifications/manager.dart';
 import 'package:nexus_desktop_environment/system/user/manager.dart';
 import 'package:nexus_desktop_environment/utils/encrypted_string.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatelessWidget {
   final UserManager _um = UserManager();
@@ -83,18 +82,21 @@ class SignIn extends StatelessWidget {
       _clearInput();
       // Show snackbar indicating invalid input.
       // TODO: Error Scaffold.of() called on context that does not contain a Scaffold.
-      Scaffold.of(context).showSnackBar(sb);
+      ScaffoldMessenger.of(context).showSnackBar(sb);
       return;
     }
     final user = _um.login(username, password);
     if (user == null) {
       _clearInput();
       // Show snackbar indicating generic username/password issue.
-      Scaffold.of(context).showSnackBar(sb);
+      ScaffoldMessenger.of(context).showSnackBar(sb);
       return;
     }
-    _um.current = user;
-    Provider.of<NotificationManager>(context, listen: false).currentUser = user;
+
+    // TODO: Fix Notification Manager
+    NotificationManager().currentUser = _um.current;
+    // Was coming up as null
+    // Provider.of<NotificationManager>(context, listen: false).currentUser = _um.current;
     await Navigator.popAndPushNamed(context, 'desktop', arguments: user);
   }
 

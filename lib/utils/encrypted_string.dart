@@ -4,7 +4,7 @@ import 'package:crypto/crypto.dart';
 
 class EncryptedString {
   String _value;
-  EncryptedString({String toEncrypt}) : _value = _encrypt(toEncrypt);
+  EncryptedString({String toEncrypt = ""}) : _value = _encrypt(toEncrypt);
 
   factory EncryptedString.fromEncrypted(String encrypted) =>
       EncryptedString().._value = encrypted;

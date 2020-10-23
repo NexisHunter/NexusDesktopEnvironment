@@ -9,6 +9,10 @@ import 'nexus_desktop_environment.dart';
 
 void main() {
   Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((event) {
+    print(
+        '${event.loggerName}-${event.level}: ${event.time} | ${event.message}');
+  });
   // Start Up Initial services
   ApplicationManager();
   UserManager();

@@ -24,6 +24,7 @@ class Notification {
   }) : _ts = DateTime.now();
 
   markAsRead() => _read = true;
+  bool get isRead => _read;
 
   @override
   String toString() {

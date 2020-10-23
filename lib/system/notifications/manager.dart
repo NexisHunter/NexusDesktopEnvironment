@@ -1,19 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:nexus_desktop_environment/system/notifications/notification.dart';
-import 'package:nexus_desktop_environment/system/user/manager.dart';
 import 'package:nexus_desktop_environment/system/user/user.dart';
 
 class NotificationManager extends ChangeNotifier {
   static final _instance = NotificationManager._();
   NotificationManager._() : _logger = Logger("NotificationManager");
   factory NotificationManager() => _instance;
-  // TODO: Fix the logger impl.
   final Logger _logger;
+  User _current;
 
-  User _current = UserManager().current;
   set currentUser(User user) {
-    if (_current != null || _current != user) {
+    if (_current != null && _current != user) {
+      // if (_current != user && _current != null) {
+      _logger.fine("Storing ${_current.username}'s notifications");
+      // }
       // Write the state of the original user's notifications
       final userEntries = <String, List<Notification>>{
         '${_current.username}': _pending,
@@ -24,7 +25,7 @@ class NotificationManager extends ChangeNotifier {
     _current = user;
     // Load pending with user notifications
     // Notify dependants
-    pending = _userPending[_current.username];
+    pending = _userPending[_current.username] ?? [];
   }
 
   List<Notification> _pending = [];

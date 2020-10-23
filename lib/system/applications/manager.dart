@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:logging/logging.dart';
 import 'package:nexus_desktop_environment/system/applications/application.dart';
 import 'package:nexus_desktop_environment/utils/string_extensions.dart';
 
@@ -16,6 +17,7 @@ class ApplicationManager {
     _getInstalledApplications();
   }
   factory ApplicationManager() => _instance;
+  final _logger = Logger('ApplicationManager');
 
   // The currently running [_applications]
   List<Application> _applications = [];
@@ -25,6 +27,7 @@ class ApplicationManager {
   _getInstalledApplications() {
     // TODO: Use isolates???
     // Look through bin
+    _logger.info('Loading System Applications');
     Directory bin = Directory('/usr/bin');
     Directory sbin = Directory('/usr/sbin');
     _getAppsFromDir(bin);
@@ -50,6 +53,8 @@ class ApplicationManager {
 
   // Start
   start(String appName) async {
+    // TODO: Handle Password Request when /usr/sbin apps are run
+    // May map to system application directory in NexisOs Project
     final app = _installed.firstWhere(
       (app) => app.name.toLowerCase() == appName.toLowerCase(),
     );

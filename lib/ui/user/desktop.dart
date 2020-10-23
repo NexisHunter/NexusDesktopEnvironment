@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_desktop_environment/system/notifications/manager.dart';
-import 'package:nexus_desktop_environment/system/notifications/notification.dart'
-    as notif;
 import 'package:nexus_desktop_environment/system/user/user.dart';
 import 'package:nexus_desktop_environment/ui/notifications/overlays/alert_overlay.dart';
 import 'package:nexus_desktop_environment/ui/notifications/panel.dart';
 import 'package:provider/provider.dart';
+
+import 'menus/kicker.dart';
 
 class Desktop extends StatefulWidget {
   final User user;
@@ -14,7 +14,7 @@ class Desktop extends StatefulWidget {
 }
 
 class _DesktopState extends State<Desktop> {
-  bool _hideNotifs;
+  bool _hideNotifs, _showMenu = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -48,7 +48,7 @@ class _DesktopState extends State<Desktop> {
             //  Transparent
             //  height: 25
             //  width:  60
-            if (_hideNotifs)NotificationAlertOverlay(),
+            if (_hideNotifs) NotificationAlertOverlay(),
             if (!_hideNotifs)
               Positioned.directional(
                 textDirection: TextDirection.ltr,
@@ -67,6 +67,7 @@ class _DesktopState extends State<Desktop> {
                   child: NotificationPanel(user: widget.user),
                 ),
               ),
+            if (_showMenu) KickerMenu(),
           ],
         ),
       ),
@@ -80,8 +81,8 @@ class _DesktopState extends State<Desktop> {
       child: Row(
         children: [
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => () {},
+            icon: Icon(Icons.crop_square_rounded),
+            onPressed: () => _showKickerMenu(),
           ),
           Spacer(),
           IconButton(
@@ -92,18 +93,13 @@ class _DesktopState extends State<Desktop> {
     );
   }
 
+  void _showKickerMenu() {
+    setState(() {
+      _showMenu = !_showMenu;
+    });
+  }
+
   void _showNotifs(BuildContext context) {
-    if (!_hideNotifs) {
-      var notification = notif.Notification(
-          title: "Test Notification",
-          message: "Well, Hi there.\nThis is a test.\nStill showing.\nHidden",
-          applicationName: "Test",
-          user: widget.user);
-      Provider.of<NotificationManager>(
-        context,
-        listen: false,
-      ).pushNotification(notification, user: widget.user);
-    }
     setState(() {
       _hideNotifs = !_hideNotifs;
     });

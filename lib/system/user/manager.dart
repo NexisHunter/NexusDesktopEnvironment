@@ -18,29 +18,34 @@ class UserManager {
 
   UserManager._() {
     if (!_usersFile.existsSync()) {
+      _logger.warning('Creating users file.');
       // DURING TESTING ENSURE THAT /home can be written by the user until this
       // service is started by root (Which only happens during deploy and
       // dog-fooding)
       _usersFile.createSync();
+    } else {
+      _logger.info('Found User file');
     }
+
     _parseUsersFile();
   }
 
   _parseUsersFile() {
     String f = _usersFile.readAsStringSync();
-    if (f.isEmpty || f.length == 1) {
-      // If the file is empty, assume that it is a fresh install.
-      return;
+    if (f.trim().isNotEmpty) {
+      // Decode the users
+      String usersString = utf8.decode(base64Decode(f));
+      Map<String, dynamic> userListMap = json.decode(usersString);
+      List<dynamic> users = userListMap['users'];
+      _logger.fine('Userlist: $users');
+      // Parse each user and add them to the list of users available for use.
+      users.forEach((userString) {
+        Map<String, dynamic> userMap = jsonDecode(userString as String);
+        final user = User.fromMap(userMap);
+        _users.add(user);
+      });
     }
-    String usersString = utf8.decode(base64Decode(f));
-    _logger.warning(usersString);
-    Map userList = json.decode(usersString);
-    _logger.warning(userList);
-//    userList = userList.cast<Map<String, dynamic>>();
-
-//    userList.forEach((userMap) {
-//      _users.add(User.fromMap(userMap));
-//    });
+    _logger.info('Loaded Users');
   }
 
   checkValidUser(String username) {
@@ -67,6 +72,7 @@ class UserManager {
       return null;
     }
 
+    current = user;
     return user;
   }
 
@@ -81,6 +87,7 @@ class UserManager {
   }) {
     // TODO: Fix name in creation of user
     final user = User(username: username, password: password, name: username);
+    _logger.fine('Creating User: $username');
     _users.add(user);
     // TODO: Create home file if not available
     _updateUsersFile();
@@ -89,10 +96,12 @@ class UserManager {
   /// [_updateUsersFile] ensures that the listing of all users.
   ///
   /// Updates, and encodes the current users available to the system.
-  _updateUsersFile() async {
+  void _updateUsersFile() async {
+    _logger.info('Updating users');
     String users = '{"users":[';
+    // Ensure the current set of users is kept as the file is overwritten each time.
     for (final user in _users) {
-      users += '${jsonEncode(user.toMap())},';
+      users += '${jsonEncode("{$user}")},';
     }
     users = users.substring(0, users.lastIndexOf(','));
     users += ']}';
@@ -102,5 +111,6 @@ class UserManager {
           utf8.encode(users),
         ),
         mode: FileMode.writeOnly);
+    _logger.info('Users updated.');
   }
 }
