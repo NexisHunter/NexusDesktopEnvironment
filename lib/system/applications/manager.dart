@@ -19,14 +19,13 @@ class ApplicationManager {
   factory ApplicationManager() => _instance;
   final _logger = Logger('ApplicationManager');
 
-  // The currently running [_applications]
+  /// The currently running [_applications]
   List<Application> _applications = [];
-  get runningApps => _applications;
+  List<Application> get runningApps => _applications;
   List<Application> _installed = [];
-  get installedApps => _installed;
+  List<Application> get installedApps => _installed;
   _getInstalledApplications() {
     // TODO: Use isolates???
-    // Look through bin
     _logger.info('Loading System Applications');
     Directory bin = Directory('/usr/bin');
     Directory sbin = Directory('/usr/sbin');

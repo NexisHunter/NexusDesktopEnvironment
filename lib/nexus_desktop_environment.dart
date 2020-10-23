@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_desktop_environment/system/user/user.dart';
-import 'package:nexus_desktop_environment/ui/system/lock_screen.dart';
-import 'package:nexus_desktop_environment/ui/system/sign_in_page.dart';
+import 'package:nexus_desktop_environment/ui/system/pages/lock_screen.dart';
+import 'package:nexus_desktop_environment/ui/system/pages/sign_in_page.dart';
 import 'package:nexus_desktop_environment/ui/user/desktop.dart';
 
 /// [NexusDesktopEnvironment] is the main driver behind the DE.

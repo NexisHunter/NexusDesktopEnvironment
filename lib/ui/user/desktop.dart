@@ -3,9 +3,8 @@ import 'package:nexus_desktop_environment/system/notifications/manager.dart';
 import 'package:nexus_desktop_environment/system/user/user.dart';
 import 'package:nexus_desktop_environment/ui/notifications/overlays/alert_overlay.dart';
 import 'package:nexus_desktop_environment/ui/notifications/panel.dart';
+import 'package:nexus_desktop_environment/ui/system/menus.dart';
 import 'package:provider/provider.dart';
-
-import 'menus/kicker.dart';
 
 class Desktop extends StatefulWidget {
   final User user;
