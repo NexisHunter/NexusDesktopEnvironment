@@ -8,8 +8,10 @@ class NotificationManager extends ChangeNotifier {
   NotificationManager._() : _logger = Logger("NotificationManager");
   factory NotificationManager() => _instance;
   final Logger _logger;
-  User _current;
+  Map _userPending = <String, List<Notification>>{};
+  Map<String, List<Notification>> get allNotifications => _userPending;
 
+  User _current;
   set currentUser(User user) {
     if (_current != null && _current != user) {
       // if (_current != user && _current != null) {
@@ -28,12 +30,15 @@ class NotificationManager extends ChangeNotifier {
     pending = _userPending[_current.username] ?? [];
   }
 
+  User get currentUser => _current;
+
   List<Notification> _pending = [];
-  List<Notification> get pending => _pending;
   set pending(List<Notification> pending) {
     _pending = pending;
     notifyListeners();
   }
+
+  List<Notification> get pending => _pending;
 
   /// Tap into the most recently received [Notification].
   Stream<Notification> get alertStream {
@@ -47,8 +52,6 @@ class NotificationManager extends ChangeNotifier {
     );
   }
 
-  Map<String, List<Notification>> _userPending = {};
-
   /// Push a [notification] to the system
   pushNotification(Notification notification, {User user}) {
     // _logger.info("Adding $notification");
@@ -58,5 +61,15 @@ class NotificationManager extends ChangeNotifier {
     } else {
       pending = [notification, ..._pending];
     }
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // To be used only for testing.
+  //////////////////////////////////////////////////////////////////////
+  // TODO: Find/Make Annotation for test only.
+  void reset() {
+    _current = null;
+    _pending = [];
+    _userPending = <String, List<Notification>>{};
   }
 }

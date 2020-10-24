@@ -13,7 +13,8 @@ class User {
   User({@required String username, String name, EncryptedString password})
       : _username = username,
         _name = name,
-        _password = password;
+        // If the password is not present build an empty string password.
+        _password = password ?? EncryptedString();
 
   factory User.fromMap(Map<String, dynamic> userMap) => User(
         username: userMap['username'] as String,

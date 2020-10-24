@@ -3,11 +3,13 @@ import 'package:nexus_desktop_environment/system/applications.dart';
 
 void main() {
   group("Applications: ", () {
-    test("Application", () {
-      final echo = Application(name: "Echo", path: "/usr/bin/echo");
-      expect(echo.name, "Echo");
-      expect(echo.path, "/usr/bin/echo");
-      expect(echo.process, null);
+    group("Application", () {
+      test("Sample Application", () {
+        final echo = Application(name: "Echo", path: "/usr/bin/echo");
+        expect(echo.name, "Echo");
+        expect(echo.path, "/usr/bin/echo");
+        expect(echo.process, null);
+      });
     });
     group("Manager", () {
       ApplicationManager manger;
