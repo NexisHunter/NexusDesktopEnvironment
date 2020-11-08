@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nexus_desktop_environment/system/notifications/manager.dart';
-import 'package:nexus_desktop_environment/system/user/manager.dart';
-import 'package:nexus_desktop_environment/utils/encrypted_string.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart';
 
 class SignIn extends StatelessWidget {
   final UserManager _um = UserManager();
@@ -93,7 +91,7 @@ class SignIn extends StatelessWidget {
       return;
     }
 
-    // TODO: Fix Notification Manager
+    // TODO: Fix Notification Manager and provider compatibility
     NotificationManager().currentUser = _um.current;
     // Was coming up as null
     // Provider.of<NotificationManager>(context, listen: false).currentUser = _um.current;

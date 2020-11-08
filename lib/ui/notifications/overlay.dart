@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_desktop_environment/system/notifications/manager.dart';
-import 'package:nexus_desktop_environment/system/user/user.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 import 'package:provider/provider.dart';
 
 import 'entry.dart';
 
 class NotificationOverlay extends StatefulWidget {
-  final User user;
+  final system.User user;
   NotificationOverlay(this.user);
   @override
   _NotificationOverlayState createState() => _NotificationOverlayState();
@@ -15,7 +14,7 @@ class NotificationOverlay extends StatefulWidget {
 class _NotificationOverlayState extends State<NotificationOverlay> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<NotificationManager>(
+    return Consumer<system.NotificationManager>(
       builder: (ctx, manager, child) => Container(
         padding: const EdgeInsets.only(
           top: 4,

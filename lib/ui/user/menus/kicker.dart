@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 
+/// This menu is the user menu for the desktop.
+///
+/// The style of the menu may change based on user preference but the minimum
+/// functionality that will always be provided is a means of accessing the
+/// [system.Application]s.
 class KickerMenu extends StatefulWidget {
   @override
   _KickerMenuState createState() => _KickerMenuState();
@@ -53,5 +59,13 @@ class _KickerMenuState extends State<KickerMenu> {
         ),
       ),
     );
+  }
+
+  _buildApplicationList() {
+    // Use system.ApplicationManager().installed
+    // DEFAULT SORT:
+    // Sort based on Application Name
+    // Exclude terminal based apps for now or filter them into a sub list and
+    //    build the entry that way
   }
 }

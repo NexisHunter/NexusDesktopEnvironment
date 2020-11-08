@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_desktop_environment/system/user/user.dart';
-import 'package:nexus_desktop_environment/ui/notifications/overlay.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
+
+import 'overlay.dart';
 
 class NotificationPanel extends StatefulWidget {
-  final User user;
+  final system.User user;
   NotificationPanel({this.user});
   @override
   _NotificationPanelState createState() => _NotificationPanelState();

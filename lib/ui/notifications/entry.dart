@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../../system/notifications/notification.dart' as notif;
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 
 class NotificationEntry extends StatelessWidget {
-  final notif.Notification _notification;
-  NotificationEntry({@required notif.Notification notification})
+  final system.Notification _notification;
+  NotificationEntry({@required system.Notification notification})
       : _notification = notification;
   @override
   Widget build(BuildContext context) {
