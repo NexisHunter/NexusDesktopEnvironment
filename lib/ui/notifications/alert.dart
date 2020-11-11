@@ -19,9 +19,7 @@ class NotificationAlert extends StatelessWidget {
           const Radius.circular(4),
         ),
       ),
-      child: NotificationEntry(
-        notification: _notification,
-      ),
+      child: NotificationEntry(_notification),
     );
   }
 }

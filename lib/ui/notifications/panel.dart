@@ -3,6 +3,8 @@ import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 
 import 'overlay.dart';
 
+/// This is the provides all of the [system.User]'s [system.Notification]s.
+///
 class NotificationPanel extends StatefulWidget {
   final system.User user;
   NotificationPanel({this.user});
@@ -22,12 +24,20 @@ class _NotificationPanelState extends State<NotificationPanel> {
             flex: 3,
             child: NotificationOverlay(widget.user),
           ),
-          Container(
-            color: Colors.blue,
-            height: 25,
-          ),
+          OptionsPanel(),
         ],
       ),
+    );
+  }
+}
+
+class OptionsPanel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      color: Colors.blue,
+      height: 25,
     );
   }
 }

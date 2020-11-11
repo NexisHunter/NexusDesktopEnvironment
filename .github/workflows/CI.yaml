@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '^ui/.*'
+      - '^refactor/.*'
+      - '^ci/.*'
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    continaer: nexushunter/docker_flutter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Unit Tests.
+        run: flutter test --coverage

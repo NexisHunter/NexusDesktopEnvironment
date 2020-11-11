@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 
+/// This entry represents a [Notification] as a card style component.
+///
 class NotificationEntry extends StatelessWidget {
-  final system.Notification _notification;
-  NotificationEntry({@required system.Notification notification})
-      : _notification = notification;
+  final system.Notification notification;
+  NotificationEntry(this.notification);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -20,7 +22,7 @@ class NotificationEntry extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text('${_notification.title}'),
+          Text('${notification.title}'),
           Expanded(
             flex: 2,
             child: Row(
@@ -39,7 +41,7 @@ class NotificationEntry extends StatelessWidget {
                   flex: 2,
                   child: Container(
                     child: Text.rich(
-                      TextSpan(text: _notification.message),
+                      TextSpan(text: notification.message),
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,

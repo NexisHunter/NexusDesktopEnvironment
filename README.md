@@ -1,4 +1,4 @@
-### Nexus Desktop Environment
+### Nexus Desktop Environment [![Coverage Status](https://coveralls.io/repos/github/Nexushunter/NexusDesktopEnvironment/badge.svg?branch=main)](https://coveralls.io/github/Nexushunter/NexusDesktopEnvironment?branch=main)
 
 This project represents what will become the desktop environment of a custom linux operating system, Nexus OS (WIP). 
 
