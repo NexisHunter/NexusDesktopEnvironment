@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
-import 'package:provider/provider.dart';
 
 import 'entry.dart';
 
@@ -16,19 +15,18 @@ class NotificationOverlay extends StatefulWidget {
 class _NotificationOverlayState extends State<NotificationOverlay> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<system.NotificationManager>(
-      builder: (context, manager, child) => Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: manager.pending.length,
-              itemBuilder: (_, index) => NotificationEntry(
-                manager.pending[index],
-              ),
+    final manager = system.NotificationManager();
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: manager.pending.length,
+            itemBuilder: (_, index) => NotificationEntry(
+              manager.pending[index],
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
