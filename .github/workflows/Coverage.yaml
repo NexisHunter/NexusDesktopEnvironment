@@ -17,7 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Update the coverage
-        run: flutter test --coverage
+        run: |
+          flutter test --coverage
+          cat ./coverage/lcov.info
       - name: Update Coveralls
         uses: coverallsapp/github-action@master
         with:
