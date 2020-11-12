@@ -6,10 +6,10 @@ on:
       - main
 
 jobs:
-  build:
+  update-coverage:
     name: Update Coverage
     runs-on: ubuntu-latest
-    container: nexushunter/docker_flutter
+    container: nexishunter/docker_flutter
     steps:
       - name: Checkout
         uses: actions/checkout@v2

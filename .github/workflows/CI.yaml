@@ -3,18 +3,18 @@ name: CI
 on:
   push:
     branches:
-      - '^ui/.*'
-      - '^refactor/.*'
-      - '^ci/.*'
+      - 'ui/**'
+      - 'refactor/**'
+      - 'ci/**'
   pull_request:
     branches:
       - 'main'
 
 jobs:
-  tests:
+  unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
-    container: nexushunter/docker_flutter
+    container: nexishunter/docker_flutter
     steps:
       - name: Checkout
         uses: actions/checkout@v2
