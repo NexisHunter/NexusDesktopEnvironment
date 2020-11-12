@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_desktop_environment/system/notifications/notification.dart'
-    as notif;
-import 'package:nexus_desktop_environment/ui/notifications/entry.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
 
+import 'entry.dart';
+
+/// This alerts the current [system.User] about a notification.
+///
+/// This alert appears on the desktop of the current user.
 class NotificationAlert extends StatelessWidget {
-  final notif.Notification _notification;
-  NotificationAlert({@required notif.Notification notification})
+  final system.Notification _notification;
+  NotificationAlert({@required system.Notification notification})
       : _notification = notification;
   @override
   Widget build(BuildContext context) {
-    // TODO: Use Positioned.directional
-    return Positioned.directional(
-      textDirection: TextDirection.ltr,
-      height: 150,
-      width: 200,
-      // TODO: Get Position from User prefs
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blueGrey,
-          borderRadius: BorderRadius.all(
-            const Radius.circular(4),
-          ),
-        ),
-        child: NotificationEntry(
-          notification: _notification,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.blueGrey,
+        borderRadius: BorderRadius.all(
+          const Radius.circular(4),
         ),
       ),
+      child: NotificationEntry(_notification),
     );
   }
 }

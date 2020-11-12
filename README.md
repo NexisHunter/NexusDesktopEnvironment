@@ -1,16 +1,13 @@
-# nexus_desktop_enironment
+### Nexus Desktop Environment [![Coverage Status](https://coveralls.io/repos/github/Nexushunter/NexusDesktopEnvironment/badge.svg?branch=main)](https://coveralls.io/github/Nexushunter/NexusDesktopEnvironment?branch=main)
 
-A new Flutter project.
+This project represents what will become the desktop environment of a custom linux operating system, Nexus OS (WIP). 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+#### Versioning
 
-A few resources to get you started if this is your first Flutter project:
+__Note:__
+Once the system, packaged as `nexus_os_system`, reaches a stable phase, v1 will be released. Until then versioning will be `v0.X.Y` where `X` will represent a major change in the `lib/ui` library API and `Y` will represent the minor changes. Upon release of `v1.0.0` the repo will revert to standard Dart [versioning](https://dart.dev/tools/pub/versioning#semantic-versions).
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+#### How to Contribute
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For Information on how to contribute, see [Contributing](docs/CONTRIBUTING.md).

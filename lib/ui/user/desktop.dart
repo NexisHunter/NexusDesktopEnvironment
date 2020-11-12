@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_desktop_environment/system/notifications/manager.dart';
-import 'package:nexus_desktop_environment/system/user/user.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart';
+
 import 'package:nexus_desktop_environment/ui/notifications/overlays/alert_overlay.dart';
 import 'package:nexus_desktop_environment/ui/notifications/panel.dart';
 import 'package:provider/provider.dart';

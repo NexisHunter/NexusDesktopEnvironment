@@ -102,6 +102,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4"
+  nexusos_sdk:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "523298a80dc908f8fa0c48e0729e7238f679ac50"
+      url: "git@github.com:Nexushunter/nexusos_sdk.git"
+    source: git
+    version: "0.0.1"
   path:
     dependency: transitive
     description:
@@ -179,4 +188,4 @@ packages:
     version: "2.1.0-nullsafety.3"
 sdks:
   dart: ">=2.10.0-110 <=2.11.0-238.0.dev"
-  flutter: ">=1.16.0"
+  flutter: ">=1.17.0"

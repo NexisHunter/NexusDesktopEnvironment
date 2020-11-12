@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_desktop_environment/system/user/user.dart';
-import 'package:nexus_desktop_environment/ui/system/lock_screen.dart';
-import 'package:nexus_desktop_environment/ui/system/sign_in_page.dart';
-import 'package:nexus_desktop_environment/ui/user/desktop.dart';
+import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
+
+import 'ui/system/lock_screen.dart';
+import 'ui/system/sign_in_page.dart';
+import 'ui/user/desktop.dart';
 
 /// [NexusDesktopEnvironment] is the main driver behind the DE.
 ///
@@ -31,8 +32,8 @@ class NexusDesktopEnvironment extends StatelessWidget {
   /// [requestedRoute] is the route requesting to be displayed. It contains the
   /// possible parameters needed to route.
   Route<dynamic> _generateRoutes(RouteSettings requestedRoute) {
-    User user;
-    if (requestedRoute.arguments is User) {
+    system.User user;
+    if (requestedRoute.arguments is system.User) {
       user = requestedRoute.arguments;
     }
     switch (requestedRoute.name) {
