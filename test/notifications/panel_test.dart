@@ -12,6 +12,7 @@ void main() {
     Widget app;
     system.Notification notif;
     system.NotificationManager notifManager;
+
     setUpAll(() {
       user = system.User(
           username: 'test-user',
@@ -28,10 +29,12 @@ void main() {
         ),
       );
     });
+
     testWidgets('Has Notification List', (tester) async {
       await tester.pumpWidget(app);
       expect(find.byType(NotificationOverlay), findsOneWidget);
     });
+
     testWidgets(
       'Has Options Menu',
       (tester) async {
@@ -39,6 +42,8 @@ void main() {
         expect(find.byType(OptionsPanel), findsOneWidget);
       },
     );
+
+    // TODO: Move to test/notifications/overlay_test.dart
     testWidgets(
       'Receives a Notification',
       (tester) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:nexusos_sdk/nexusos_sdk.dart' as system;
+import 'package:provider/provider.dart';
 
 import 'nexus_desktop_environment.dart';
 
@@ -21,7 +22,11 @@ void main() {
   // Now that all the required services are started up begin the desktop
   // environment.
   runApp(
-    // TODO: Check in to using provider/other state-management.
-    NexusDesktopEnvironment(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => system.NotificationManager()),
+      ],
+      child: NexusDesktopEnvironment(),
+    ),
   );
 }
