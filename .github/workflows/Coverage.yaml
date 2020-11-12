@@ -19,7 +19,7 @@ jobs:
       - name: Update the coverage
         run: |
           flutter test --coverage
-          cat ./coverage/lcov.info
+          echo "$(cat ./coverage/lcov.info)"
       - name: Update Coveralls
         uses: coverallsapp/github-action@master
         with:
