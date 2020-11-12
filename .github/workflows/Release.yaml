@@ -2,8 +2,7 @@ name: Release
 
 on:
   schedule:
-    # Create a release on Mondays
-    - cron: '* * * 1'
+    - cron: '* 12 * * MON' # Create a release on Mondays at noon
 
 env:
   VERSION: ''
