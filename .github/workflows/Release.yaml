@@ -27,15 +27,15 @@ jobs:
           zip -r linux.zip ./
           mv linux.zip ../../../../
       - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ VERSION }}
-            release_name: Release ${{ VERSION }}
-            draft: false
-            prerelease: true
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ VERSION }}
+          release_name: Release ${{ VERSION }}
+          draft: false
+          prerelease: true
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
