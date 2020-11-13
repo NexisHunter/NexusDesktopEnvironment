@@ -26,12 +26,13 @@ jobs:
           flutter upgrade
           flutter config --enable-web --enable-linux-desktop
           flutter precache --{web,linux}
-          flutter pub get
 
       - name: Checkout
         uses: actions/checkout@v1
       - name: Run Integration Tests
-        run: flutter test --coverage
+        run: |
+          flutter pub get
+          flutter test --coverage
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
