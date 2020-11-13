@@ -46,10 +46,11 @@ jobs:
     needs: test
     steps:
       - name: Coveralls
-        uses: coverallsapp/github-action@v1.0.1
+        uses: coverallsapp/github-action@v1.1.2
         with:
-          github-token: ${{ sercets.github-token }}
+          github-token: ${{ sercets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info
+          base-path: lib
 
 #  update-coverage:
 #    name: Update Coverage
