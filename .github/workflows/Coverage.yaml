@@ -29,27 +29,27 @@ jobs:
           flutter config --enable-web --enable-linux-desktop
           flutter precache --{web,linux}
           flutter pub get
-    test:
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: Integration Tests
-          run: flutter test --coverage test/*_test.dart
-        - name: Archive code coverage results
-          uses: actions/upload-artifact@v2
-          with:
-            name: code-coverage
-            path: coverage/lcov.info
 
-    coverage:
-      runs-on: ubuntu-latest
-      needs: test
-      steps:
-        - name: Coveralls
-          uses: coverallsapp/github-action@v1.0.1
-          with:
-            github-token: ${{ sercets.github-token }}
-            path-to-lcov: ./coverage/lcov.info
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Integration Tests
+        run: flutter test --coverage test/*_test.dart
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage/lcov.info
+  coverage:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.0.1
+        with:
+          github-token: ${{ sercets.github-token }}
+          path-to-lcov: ./coverage/lcov.info
 
 #  update-coverage:
 #    name: Update Coverage
