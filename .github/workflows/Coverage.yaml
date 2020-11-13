@@ -18,11 +18,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Update the coverage
         run: |
-          flutter test --coverage
+          mkdir -p coverage
+          flutter test --coverage --coverage-path=coverage/lcov.info
+          sleep 3
+          ls -la coverage/
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage.info
+          name: code-coverage
           path: coverage/lcov.info
 
   publish:
@@ -33,10 +36,12 @@ jobs:
       - name: Load Coverage
         uses: actions/download-artifact@v2
         with:
-          name: code-coverage.info
-
+          name: code-coverage
+      - name: Extract Coverage
+        run: |
+          unzip code-coverage.zip
       - name: Update Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: code-coverage.info
+          path-to-lcov: lcov.info
