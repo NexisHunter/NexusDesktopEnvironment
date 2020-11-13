@@ -18,8 +18,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Update the coverage
         run: |
-          mkdir -p coverage
-          flutter test --coverage --coverage-path=coverage/lcov.info
+          mkdir coverage
+          flutter test --coverage
           ls -la coverage/
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
