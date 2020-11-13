@@ -17,12 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Update the coverage
-        id: gen_covg
         run: |
           flutter test --coverage
-          COVERAGE="$(cat ./coverage/lcov.info)"
-
-          echo "::set-output name=coverage::${COVERAGE}"
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage.info
+          path: coverage/lcov.info
 
   publish:
     name: Publish Coverage
@@ -30,10 +31,12 @@ jobs:
     needs: update-coverage
     steps:
       - name: Load Coverage
-        run: |
-          mkdir -p coverage
-          echo ${{ needs.update-coverage.outputs.coverage }} >> ./coverage/lcov.info
+        uses: actions/download-artifact@v2
+        with:
+          name: code-coverage.info
+
       - name: Update Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: code-coverage.info
