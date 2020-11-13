@@ -24,21 +24,21 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage.zip
+          name: code-coverage
           path: coverage/lcov.info
 
-  publish:
-    name: Publish Coverage
-    runs-on: ubuntu-latest
-    needs: update-coverage
-    steps:
-      - name: Load Coverage
-        uses: actions/download-artifact@v2
-        with:
-          name: code-coverage.zip
-      - name: Extract Coverage
-        run: |
-          unzip code-coverage.zip
+#   publish:
+#     name: Publish Coverage
+#     runs-on: ubuntu-latest
+#     needs: update-coverage
+#     steps:
+#       - name: Load Coverage
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: code-coverage
+#       - name: Extract Coverage
+#         run: |
+#           unzip code-coverage
       - name: Update Coveralls
         uses: coverallsapp/github-action@master
         with:
