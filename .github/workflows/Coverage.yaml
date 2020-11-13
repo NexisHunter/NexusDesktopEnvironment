@@ -20,12 +20,11 @@ jobs:
         run: |
           mkdir -p coverage
           flutter test --coverage --coverage-path=coverage/lcov.info
-          sleep 3
           ls -la coverage/
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage
+          name: code-coverage.zip
           path: coverage/lcov.info
 
   publish:
@@ -36,7 +35,7 @@ jobs:
       - name: Load Coverage
         uses: actions/download-artifact@v2
         with:
-          name: code-coverage
+          name: code-coverage.zip
       - name: Extract Coverage
         run: |
           unzip code-coverage.zip
