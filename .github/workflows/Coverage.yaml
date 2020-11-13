@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir coverage 
           touch coverage/lcov.info
-          chmod 777 coverage/lcov,info
+          chmod 777 coverage/lcov.info
           flutter test --coverage
           ls -la coverage/
       - name: Archive code coverage results
