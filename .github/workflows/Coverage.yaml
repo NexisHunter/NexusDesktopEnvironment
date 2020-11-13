@@ -20,7 +20,7 @@ jobs:
         id: gen_covg
         run: |
           flutter test --coverage
-          COVERAGE=$(echo "$(cat ./coverage/lcov.info)")
+          COVERAGE="$(cat ./coverage/lcov.info)"
 
           echo "::set-output name=coverage::${COVERAGE}"
 
