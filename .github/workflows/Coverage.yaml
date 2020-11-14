@@ -32,7 +32,7 @@ jobs:
       - name: Run Integration Tests
         run: |
           flutter pub get
-          flutter -v test --coverage >> flutter_ouput.log
+          flutter -v test --coverage 2>&1 | tee flutter_ouput.log
       - name: Archive flutter log report
         uses: actions/upload-artifact@v2
         with:
