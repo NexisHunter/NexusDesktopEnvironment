@@ -14,8 +14,24 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: nexishunter/docker_flutter
+    # container: nexishunter/docker_flutter
     steps:
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: Switch Flutter to Master
+        # Set up flutter on master channel to allow for desktop testing/building
+        run: |
+          flutter channel master
+          flutter upgrade
+          flutter config --enable-web --enable-linux-desktop
+          flutter precache --{web,linux}
+          
       - name: Checkout
         uses: actions/checkout@v2
       - name: Collect Version
