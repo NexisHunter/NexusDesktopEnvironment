@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 12 * * MON' # Create a release on Mondays at noon
+  push:
+    branches:
+      - 'ci/fix-release'
 
 env:
   VERSION: ''
